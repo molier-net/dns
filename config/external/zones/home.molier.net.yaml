@@ -1,0 +1,21 @@
+---
+'':
+  - type: NS
+    values: 
+      - ns1.molier.net.
+      - ns2.molier.net.
+  - type: MX
+    values:
+      - exchange: gateway.home.molier.net.
+        preference: 10
+'*':
+  - type: CNAME
+    value: gateway.home.molier.net.
+
+gateway:
+  - type: A
+    values: 
+      - 82.165.116.192
+      - 217.160.60.56     
+
+
