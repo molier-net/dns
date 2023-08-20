@@ -1,0 +1,33 @@
+---
+providers:
+  config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: ./config/external/zones
+    default_ttl: 3600
+    enforce_order: True
+  ns1:
+    class: octodns_bind.Rfc2136Provider
+    host: ns1.molier.net
+    port: 53
+    ipv6: False
+    timeout: 15
+    key_name: env/AXFR_KEY_NAME
+    key_secret: env/AXFR_KEY_SECRET
+    key_algorithm: hmac-sha256
+  ns2:
+    class: octodns_bind.Rfc2136Provider
+    host: ns2.molier.net
+    port: 53
+    ipv6: False
+    timeout: 15
+    key_name: env/AXFR_KEY_NAME
+    key_secret: env/AXFR_KEY_SECRET
+    key_algorithm: hmac-sha256
+
+zones:
+  home.molier.net.:
+    sources:
+      - config
+    targets:
+      - ns1
+      - ns2
