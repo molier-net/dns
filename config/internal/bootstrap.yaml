@@ -1,0 +1,27 @@
+---
+providers:
+  config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: ./
+    default_ttl: 3600
+    enforce_order: True
+  local:
+    class: octodns-custom-providers.provider.zonefile.ZoneFileProvider
+    directory: ./zones
+    file_extension: zone
+    soa:
+      mname: ns.home.molier.net
+      rname: hostmaster.home.molier.net
+      serial: env/SOA_SERIAL
+      refresh: 7200
+      retry: 3600
+      expire: 1209600
+      minimum: 3600
+
+zones:
+  home.molier.net.:
+    sources:
+      - config
+    targets:
+      - local
+  

@@ -1,0 +1,37 @@
+---
+'':
+  - type: NS
+    value: ns.home.molier.net.
+  - type: MX
+    values:
+      - exchange: smtp.home.molier.net.
+        preference: 10
+'*':
+  - type: CNAME
+    value: dokku.home.molier.net.
+
+ca:
+  - type: A
+    value: 172.31.0.3
+
+dokku:
+  - type: A
+    value: 172.31.0.2
+
+ns:
+  - type: A
+    value: 172.31.0.2
+
+opnsense:
+  - type: A
+    value: 172.31.0.1
+
+smtp:
+  - type: A
+    value: 172.31.0.2
+
+truenas:
+  - type: A
+    value: 172.31.0.10
+
+
