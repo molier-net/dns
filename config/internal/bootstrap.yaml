@@ -1,8 +1,11 @@
 ---
+manager:
+  auto_arpa: true
+
 providers:
   config:
     class: octodns.provider.yaml.YamlProvider
-    directory: ./
+    directory: ./config/internal/zones
     default_ttl: 3600
     enforce_order: True
   local:
@@ -19,6 +22,12 @@ providers:
       minimum: 3600
 
 zones:
+  0.31.172.in-addr.arpa.:
+    sources:
+      - config
+      - auto-arpa
+    targets:
+      - local
   home.molier.net.:
     sources:
       - config
