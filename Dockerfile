@@ -3,20 +3,29 @@ FROM alpine:3.18 as bind
 RUN apk --update --no-cache add \
     bind=9.18.16-r0 
 
-FROM alpine:3.18 as octodns
-
-ARG ENVIRONMENT=internal
+FROM alpine:3.18 as bootstrap
 
 RUN apk --update --no-cache add \
     python3=3.11.4-r0 \
     py3-pip=23.1.2-r0 \
     py3-virtualenv=20.23.1-r0 \
     git=2.40.1-r0 && \
-    mkdir -p /octodns
+    mkdir -p /octodns/script
 
-COPY . /octodns
 WORKDIR /octodns
-RUN sh ./script/bootstrap && \
+COPY requirements.txt /octodns/
+COPY script /octodns/script/
+RUN sh ./script/bootstrap
+
+FROM scratch as octodns
+
+COPY --from=bootstrap / /
+
+ARG ENVIRONMENT=internal
+
+COPY ./config /octodns/config
+WORKDIR /octodns
+RUN mkdir -p zones && \
     . env/bin/activate && \
     SOA_SERIAL="$(date +%s)" octodns-sync --config-file=./config/${ENVIRONMENT}/bootstrap.yaml --doit
 
