@@ -38,8 +38,8 @@ ARG AXFR_KEY_SECRET
 COPY --from=bind / /
 COPY --chown=root:named ./config/${ENVIRONMENT}/bind/ /etc/bind
 
-RUN if [[ -z "${AXFR_KEY_SECRET}" ]]; then /usr/sbin/tsig-keygen -a hmac-sha256 ${AXFR_KEY_NAME} > /etc/bind/${AXFR_KEY_NAME}.key; fi
-RUN if [[ -n "${AXFR_KEY_SECRET}" ]]; then echo -e "key \"${AXFR_KEY_NAME}\" { \n\talgorithm hmac-sha256;\n\tsecret \"${AXFR_KEY_SECRET}\";\n};" > /etc/bind/${AXFR_KEY_NAME}.key; fi 
+RUN if [[ -z "${AXFR_KEY_SECRET}" ]]; then /usr/sbin/tsig-keygen -a hmac-sha512 ${AXFR_KEY_NAME} > /etc/bind/${AXFR_KEY_NAME}.key; fi
+RUN if [[ -n "${AXFR_KEY_SECRET}" ]]; then echo -e "key \"${AXFR_KEY_NAME}\" { \n\talgorithm hmac-sha512;\n\tsecret \"${AXFR_KEY_SECRET}\";\n};" > /etc/bind/${AXFR_KEY_NAME}.key; fi 
 RUN cat /etc/bind/${AXFR_KEY_NAME}.key
 
 RUN sed -i "s/%%AXFR_KEY_NAME%%/${AXFR_KEY_NAME}/g;" /etc/bind/named.conf

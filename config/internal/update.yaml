@@ -13,7 +13,7 @@ providers:
     timeout: 15
     key_name: env/AXFR_KEY_NAME
     key_secret: env/AXFR_KEY_SECRET
-    key_algorithm: hmac-sha256
+    key_algorithm: hmac-sha512
   
 zones:
   home.molier.net.:
