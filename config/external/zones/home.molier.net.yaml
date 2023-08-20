@@ -23,4 +23,7 @@ gateway:
       - 82.165.116.192
       - 217.160.60.56     
 
+www:
+  - type: CNAME
+    value: gateway.home.molier.net.
 
