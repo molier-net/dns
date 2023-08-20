@@ -33,4 +33,14 @@ zones:
       - config
     targets:
       - local
-  
+  1.10.in-addr.arpa.:
+    sources:
+      - config
+      - auto-arpa
+    targets:
+      - local
+  molier.local.:
+    sources:
+      - config
+    targets:
+      - local

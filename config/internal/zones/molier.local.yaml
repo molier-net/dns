@@ -1,0 +1,8 @@
+---
+'':
+  - type: NS
+    value: ns.home.molier.net.
+  - type: MX
+    values:
+      - exchange: smtp.home.molier.net.
+        preference: 10
