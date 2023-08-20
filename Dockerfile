@@ -48,6 +48,7 @@ RUN cat /etc/bind/named.conf
 COPY --from=octodns --chown=named:named /octodns/zones/*.zone /var/bind/pri
 
 RUN mkdir -p /var/run/named && chown root:named /var/run/named && chmod 770 /var/run/named
+RUN chown root:named /var/bind/pri && chmod 775 /var/bind/pri
 
 USER named
 
